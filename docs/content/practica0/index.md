@@ -6,7 +6,7 @@ title = 'Practica0: Manejo de repositorios'
 
 ## Descripción de la práctica
 
-Esta practica consistio en aprender a crear una pagina web, primero utilizamos markdown para creacion de documentos,luego usamos git para gestionar los cambios hechos en el proyecto y utilizamos github para guardar el repositorio en la nube.Despues creamos un sitio web usnado HUGO y tambien utilizamos github actions para la publicacion de nuestra pagina, gracias a este, cada que subiamos algun cambio al repositorio, el sitio se actualizaba automaticamente en github pages.
+Esta practica consistio en aprender a crear una pagina web, primero utilizamos markdown para creacion de documentos,luego usamos git para gestionar los cambios hechos en el proyecto y utilizamos github para guardar el repositorio en la nube.Despues creamos un sitio web usando HUGO y tambien utilizamos github actions para la publicacion de nuestra pagina, gracias a este, cada que subiamos algun cambio al repositorio, el sitio se actualizaba automaticamente en github pages.
 
 ## Desarrollo de la práctica
 Markdown es un lenguaje  de marcado ligero que permite dar formato a textos,lo utilizamos haciendo nuestro index.md para nuestra practica0,la ventaja de markdown es que solo debes usar simbolos simples.Utilizamos tambien comandos de git como git push ,git add. y git commit ,ademas utilizamos github y un repositorio para guardar conectar nuestro repositorio local al remoto que esta en github, tambien al estar en github,configuramos github actions para que automaticamente se contruyera el sitio y se publicara, tambien si quieriamos actualizar algo en esa pagina,utilizamos el ya mencionado git push.
