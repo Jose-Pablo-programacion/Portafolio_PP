@@ -38,7 +38,7 @@ Git:Git es un sistema de control de versiones distribuido,gratuito y de codigo a
 Primero creamos el proyecto en local
 usamos git init
 git add .
-git commit -m "mensaje deseado"
+git commit -m "se hizo el repositorio local"
 
 creamos nuestro repositorio en github y copiamos el url del repositorio
 usamos luego git remote add origin (url del repositorio)
@@ -47,8 +47,33 @@ Se revisa el repositorio online en github para ver que todo haya salido bien.
 
 ### Tercera sesión – Hugo y GitHub Actions
 
-Hugo es un
+Hugo es uno de los generadores de sitios web estáticos de código abierto más populares. Con su increíble velocidad y flexibilidad, Hugo hace que crear sitios web vuelva a ser divertido.
+Github actions es una plataforma de automatizacion de flujos de trabajo integrada a github que permite compilar,probar y desplegar codigo automaticamente.
+Para crear el proyecto hugo hacemos:
+1.hugo new site docs
+2.cd docs
+3.hugo new practica0/index.md
+4.Cambiamos draft a false
+5.hugo server
+para subirlo en github
+1.git add
+2.git commit -m "crear sitio hugo"
+3.push
+
+Para configurar github actions para publicar nuestro sitio  en github pages,hacemos:
+1.mkdir -p .github/workflows
+2.touch .github/workflows/hugo.yaml
+3.Ajustamos a la rama correcta osea el branch master
+Subimos el archivo con
+1.git add
+2.git commit -m "agregar workflow de github pages"
+3.push
 
 ## Conclusiones
+    Es esta practica aprendi sobre como crear sitios utilizando hugo y tambien archivos markdown para generar el contenido de una forma sencilla.Tambien aprendi a como hacer un repositorio local y como convertirlo en uno remoto utilizando git y github, tambien aprendi a usar github pages para publicar una pagina en internet.Fue sorprendente ver que no es necesario saber mucha programacion para poder utilizar markdown gracias a su simplicidad.
 
-Aquí escribes tus conclusiones...
+
+## Enlaces
+https://github.com/Jose-Pablo-programacion/Portafolio_PP#
+
+https://jose-pablo-programacion.github.io/Portafolio_PP/
