@@ -39,8 +39,6 @@ typedef struct {
     int size;
 } QueueStatic_t;
 
-
-/* Prototipos */
 void qs_init(QueueStatic_t* q);
 int  qs_is_empty(const QueueStatic_t* q);
 int  qs_is_full(const QueueStatic_t* q);
@@ -281,9 +279,10 @@ void qs_print(const QueueStatic_t* q)
         printf("id=%d usuario=%s documento=%s",q->data[i].id,q->data[i].usuario,q->data[i].documento);
     }
 }
+```
 
 -----Cola con memoria dinámica-----
-
+```c
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -323,8 +322,6 @@ typedef struct {
     int size;
 } QueueDynamic_t;
 
-
-/* Prototipos */
 void qd_init(QueueDynamic_t* q);
 int  qd_is_empty(const QueueDynamic_t* q);
 int  qd_enqueue(QueueDynamic_t* q, PrintJob_t job);
@@ -619,12 +616,15 @@ if(nuevo == NULL)
 Ejecuciones de salida
 
 1.Memoria estática
+
 ![alt text](image-15.png)
 
 ![alt text](image-16.png)
 
 2.Memoria dinámica
+
 ![alt text](image-17.png)
+
 ![alt text](image-18.png)
 
 
@@ -646,27 +646,39 @@ válida”?
 Si malloc regresa null, es fallo en la memoria. Si el usuario ingresa un nombre vacío o páginas<=0 es entrada válida, y se valida antes de llamar a qd_enqueue.
 
 1.Esta variable es local.
+
 ![alt text](image-19.png)
 
+
 2.Aqui se reserva y se valida
+
 ![alt text](image-20.png)
 
+
 Aqui se libera memoria
+
 ![alt text](image-21.png)
 
+
 3.Aqui se modifica la cola
+
 ![alt text](image-22.png)
 
+
 Aquí solo se consulta
+
 ![alt text](image-23.png)
 
 
 Cola vacia
+
 ![alt text](image-24.png)
 
 
 Cola llena
+
 ![alt text](image-25.png)
+
 
 
 
@@ -682,11 +694,20 @@ PrintJob_t=Representa un trabajo de impresion con los campos=
 Cola estatica:Usa un arreglo fijo con una capacidad maxima y size indica cuanto hay actualmente.
 Cola dinamica: Se usa lista enlazada donde cada nodo contiene un trabajo y un puntero al siguente nodo.La estructura QueueDynamic_T tiene 2 punteros, el head que apunta al primer trabajo y la cola que apunta al ultimo trabajo.Cuando quitamos un nodo , se agarra el  nodo head y head avanza al siguiente y se librera la memoria del nodo utilizando free().
 
-Es local en el main y existe mientras se corre el programa![alt text](image-1.png)
+Es local en el main y existe mientras se corre el programa.
 
-Es local en el main y existe mientras se corre el programa.![alt text](image-2.png)
+![alt text](image-1.png)
 
-Puntero local dentro de qd_destroy, se usa para recorre la lista, solo funciona dentro de esa función.![alt text](image-3.png)
+
+Es local en el main y existe mientras se corre el programa.
+
+![alt text](image-2.png)
+
+
+Puntero local dentro de qd_destroy, se usa para recorre la lista, solo funciona dentro de esa función.
+
+![alt text](image-3.png)
+
 
 
 Stack: variables como opcion, next_id, job en main se alojan automáticamente y se liberan al terminar la función.
@@ -697,44 +718,80 @@ Se libera en qd_dequeue libera el nodo sacado, qd_destroy libera todos los resta
 
 
 
-Recibe un puntero porque necesita modificar la cola.![alt text](image-4.png)
+Recibe un puntero porque necesita modificar la cola.
 
-Usa const porque solo consulta el campo size para verificar si la cola está vacía, sin modificar nada.![alt text](image-5.png)
-
-Recibe un puntero porque necesita modificar la cola agregando un nodo.![alt text](image-6.png)
-
-Usa const porque solo consulta sin modificar.![alt text](image-7.png)
-
-Recibe un puntero porque necesita modificar la cola.![alt text](image-8.png)
-
-Usa const porque solo recorre y muestra los trabajos de la cola sin modificar ningún nodo.![alt text](image-9.png)
-
-Recibe un puntero porque modifica la cola liberando nodos.![alt text](image-10.png)
+![alt text](image-4.png)
 
 
+Usa const porque solo consulta el campo size para verificar si la cola está vacía, sin modificar nada.
+
+![alt text](image-5.png)
+
+
+Recibe un puntero porque necesita modificar la cola agregando un nodo.
+
+![alt text](image-6.png)
+
+
+Usa const porque solo consulta sin modificar.
+
+![alt text](image-7.png)
+
+
+Recibe un puntero porque necesita modificar la cola.
+
+![alt text](image-8.png)
+
+
+Usa const porque solo recorre y muestra los trabajos de la cola sin modificar ningún nodo.
+
+![alt text](image-9.png)
+
+
+Recibe un puntero porque modifica la cola liberando nodos.
+
+![alt text](image-10.png)
 
 
 
 
 
-Agrupa todos los datos de un trabajo de impresión en una sola unidad. Se usó struct porque necesitamos manejar distintos tipos de datos juntos (int, char[], enum) que pertenecen a un mismo concepto.![alt text](image-11.png)
-
-Representa un nodo de la lista enlazada. Contiene un PrintJob_t con los datos del trabajo y un puntero next que apunta al siguiente nodo. ![alt text](image-12.png)
 
 
-Representa la cola completa. Contiene dos punteros: head que apunta al primer nodo y tail que apunta al último nodo, más un contador size con la cantidad actual de trabajos.![alt text](image-13.png)
+Agrupa todos los datos de un trabajo de impresión en una sola unidad. Se usó struct porque necesitamos manejar distintos tipos de datos juntos (int, char[], enum) que pertenecen a un mismo concepto.
 
-Es enum porque representa las etapas por las que pasa una impresión.![alt text](image-14.png)
+![alt text](image-11.png)
+
+
+Representa un nodo de la lista enlazada. Contiene un PrintJob_t con los datos del trabajo y un puntero next que apunta al siguiente nodo. 
+
+![alt text](image-12.png)
+
+
+Representa la cola completa. Contiene dos punteros: head que apunta al primer nodo y tail que apunta al último nodo, más un contador size con la cantidad actual de trabajos.
+
+![alt text](image-13.png)
+
+
+Es enum porque representa las etapas por las que pasa una impresión.
+
+![alt text](image-14.png)
 
 
 Cola estática: Se implementó con un arreglo fijo de tamaño MAX_JOBS=10. Su ventaja principal es la simplicidad, no requiere manejo de memoria y no puede haber fugas de memoria. Sin embargo tiene limitaciones: si se necesitan más de 10 trabajos simultáneos la cola rechaza nuevos ingresos y dice”Cola llena”, y el dequeue requiere desplazar todos los elementos una posición, lo que tiene un costo de O(n).
 
 Cola dinámica: Se implementó con una lista enlazada usando nodos Node_t creados con malloc. Su ventaja es que no tiene límite fijo de capacidad, crece según sea necesario. El enqueue es O(1) gracias al puntero cola. Sin embargo requiere manejo explícito de memoria, si se olvida llamar qd_destroy al salir ocurre una fuga de memoria, y cada nodo ocupa memoria extra por el puntero next.
 
+
 ![alt text](image-26.png)
+
+
+
+
 
 Conclusiones
 A lo largo de esta práctica, implementamos un sistema de cola de impresión en dos versiones distintas, una de memoria estática y otra de memoria dinámica.Aprendí que una cola FIFO es la estructura adecuada y correcta para este tipo de problemas ya que garantiza que los trabajos se atiendan en el orden en que llegaron.Tambien aprendi que es muy importante liberar la memoria al final del programa cuando trabajamos con memoria dinámica porque si no lo hacemos , podemos ocasionar una fuga de memoria.
+
 
 
 
