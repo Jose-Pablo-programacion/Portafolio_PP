@@ -5,7 +5,7 @@ title = 'Practica1: Elementos básicos de los lenguajes de programación'
 +++
 
 -----Cola con memoria estática-----
-
+```c
 #include <stdio.h>
 #include <string.h>
 
@@ -604,6 +604,7 @@ void qd_destroy(QueueDynamic_t* q)
     q->tail = NULL;
     q->size = 0;
 }
+```
 
 1.Dónde se aloja cada nodo (heap) y qué lo libera (quién llama free y cuándo)=Cada nodo se aloja en el heap cuando se llama qd_enqueue.La memoria se libera con free cuando se saca un nodo de la cola en qd_dequeue y en qd_destroy cuando el programa finaliza liberando todos los nodos restantes.
 
@@ -735,4 +736,9 @@ Cola dinámica: Se implementó con una lista enlazada usando nodos Node_t creado
 Conclusiones
 A lo largo de esta práctica, implementamos un sistema de cola de impresión en dos versiones distintas, una de memoria estática y otra de memoria dinámica.Aprendí que una cola FIFO es la estructura adecuada y correcta para este tipo de problemas ya que garantiza que los trabajos se atiendan en el orden en que llegaron.Tambien aprendi que es muy importante liberar la memoria al final del programa cuando trabajamos con memoria dinámica porque si no lo hacemos , podemos ocasionar una fuga de memoria.
 
+
+
+Enlaces
+https://jose-pablo-programacion.github.io/Portafolio_PP/
+https://jose-pablo-programacion.github.io/Portafolio_PP/practica1/
 
