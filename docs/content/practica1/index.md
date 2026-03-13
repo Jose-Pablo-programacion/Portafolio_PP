@@ -795,7 +795,7 @@ A lo largo de esta práctica, implementamos un sistema de cola de impresión en 
 
 
 
-##Enlaces
+## Enlaces
 
 https://jose-pablo-programacion.github.io/Portafolio_PP/
 https://jose-pablo-programacion.github.io/Portafolio_PP/practica1/
