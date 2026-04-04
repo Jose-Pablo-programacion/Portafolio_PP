@@ -384,7 +384,7 @@ En Flask el Model son todas las clases del dominio en models/, el View son los t
 
 
 Si mañana cambian las tarifas, ¿qué clase(es) tocarías y por qué? 
-Si cambian las tarifas solo tocaría HourlyRatePolicy o FlatRatePolicy dependiendo del caso. Si la nueva lógica es completamente distinta, simplemente creo una clase nueva que herede de RatePolicy y la inyecto en ParkingLot sin modificar nada más.
+Si cambian las tarifas solo tocaría HourlyRatePolicy o FlatRatePolicy dependiendo del caso. Si la nueva lógica es completamente distinta, simplemente creo una clase nueva que herede de RatePolicy y la pongo en ParkingLot sin modificar nada más.
 
 
 
