@@ -5,7 +5,9 @@ title = 'Practica2: El paradigma orientado a objetos'
 +++
 
 1. Introducción
+
 Problema
+
 desarrollo de un Simulador de Estacionamiento (Parking Lot) implementado con el paradigma de Programación Orientada a Objetos (POO) en Python 3.10+. El sistema administra un estacionamiento con lugares (spots), vehículos y tickets, permitiendo registrar entradas y salidas, calcular cobros y mostrar el estado de ocupación.
 
 El sistema debe hacer cumplir las siguientes reglas de negocio:
@@ -27,7 +29,8 @@ Emplear herencia y subtipos: Car y Motorcycle extienden Vehicle.
 Aplicar polimorfismo con una interfaz común de cobro intercambiable.
 Integrar el modelo en una interfaz web (Flask) bajo MVC simple.
 
-2. Modelo del Dominio
+Modelo del Dominio
+
 Diagrama UML en plant UML
 
 
@@ -37,6 +40,7 @@ Diagrama UML en plant UML
 
 
 Lista de Clases y Responsabilidades
+
 El sistema está compuesto por las siguientes clases principales:
 
 
@@ -51,11 +55,14 @@ El sistema está compuesto por las siguientes clases principales:
 
 
 
-3. Evidencia de Conceptos POO
+Evidencia de Conceptos POO
+
 Encapsulación
+
 La encapsulación garantiza que los atributos internos no se modifiquen directamente desde fuera de la clase. Todos los atributos del sistema son privados (prefijo _) y solo se acceden mediante propiedades o métodos. Las validaciones viven dentro de los métodos, y el sistema nunca puede quedar con dos vehículos en el mismo spot.
 
 Ejemplo — validación en ParkingSpot.park():
+```c
 def park(self, vehicle: Vehicle) -> None:
     if self._occupied:
         raise ValueError(f'El spot {self._spot_id} ya está ocupado.')
@@ -63,22 +70,25 @@ def park(self, vehicle: Vehicle) -> None:
         raise ValueError(f'Tipo de vehículo incompatible.')
     self._current_vehicle = vehicle
     self._occupied = True
-
+```
 
 Abstracción
+
 La lógica de cobro está separada del resto del sistema mediante la clase abstracta RatePolicy. Esta define el contrato calculate(hours, vehicle) → float que toda política debe implementar. ParkingLot no sabe cómo se calcula el costo; solo invoca el método de la política inyectada, lo que permite cambiar la tarifa sin modificar el modelo.
 
 Snippet — definición de RatePolicy (ABC):
+```c
 from abc import ABC, abstractmethod
 
 class RatePolicy(ABC):
     @abstractmethod
     def calculate(self, hours: float, vehicle: Vehicle) -> float:
         pass
-
+```
 
 
 Composición
+
 ParkingLot administra una colección de ParkingSpot y un diccionario de Ticket activos. Ticket, a su vez, tiene una referencia a Vehicle y a ParkingSpot. La política de cobro (RatePolicy) se inyecta en ParkingLot al momento de la construcción, siguiendo el principio de inversión de dependencias.
 
 Snippet — constructor de ParkingLot:
@@ -94,6 +104,7 @@ class ParkingLot:
 
 
 Herencia y Subtipos
+
 Car y Motorcycle son subtipos de Vehicle. Heredan su comportamiento base (validación de placa, acceso a tipo) y el constructor simplifica la creación al recibir solo la placa, delegando el tipo al padre.
 
 Snippet — jerarquía de herencia:
@@ -115,9 +126,11 @@ class Motorcycle(Vehicle):
 ```
 
 Polimorfismo
+
 HourlyRatePolicy y FlatRatePolicy implementan la misma interfaz RatePolicy. ParkingLot usa la interfaz común calculate(hours, vehicle), por lo que el comportamiento cambia según la política inyectada sin modificar el código del controlador. Esto permite agregar nuevas políticas sin tocar ParkingLot ni app.py.
 
 Snippet — polimorfismo en acción:
+
 # HourlyRatePolicy: $10/h para Car, $5/h para Motorcycle
 ```c
 hourly = HourlyRatePolicy()
@@ -154,7 +167,9 @@ print(flat.calculate(5, Car('ABC-123')))     # -> 20.0
 
 
 MVC con Flask
-4.1 Separación de responsabilidades
+
+Separación de responsabilidades
+
 La arquitectura del sistema sigue el patrón Modelo-Vista-Controlador (MVC):
 
 Model (models/): contiene todas las clases del dominio — Vehicle, Car, Motorcycle, ParkingSpot, Ticket, ParkingLot, RatePolicy y sus implementaciones. Esta capa no conoce Flask ni HTTP.
@@ -193,6 +208,7 @@ Pantallas
 
 
 Pruebas Manuales
+
 Se realizaron al menos dos flujos completos para verificar el funcionamiento del sistema.
 
 Flujo 1 — Entrada y salida de automóvil (HourlyRatePolicy)
@@ -248,6 +264,7 @@ Flujo 2 — Entrada y salida de motocicleta (polimorfismo: FlatRatePolicy)
 
 
 Sesión 1
+
 Evidencia: captura/log demostrando entrada, salida y consulta de ocupación.
 
 ![alt text](image-19.png)
@@ -263,7 +280,8 @@ Evidencia: captura/log demostrando entrada, salida y consulta de ocupación.
 
 
 
-Sesion  2
+Sesion 2
+
 Evidencia: log/captura mostrando un caso donde el polimorfismo cambia el resultado (cobro distinto).
 
 
@@ -339,6 +357,7 @@ Evidencia: capturas de las pantallas y un flujo completo (entrada -> dashboard -
 
 
 Conclusiones
+
 El desarrollo del Simulador de Estacionamiento permitió aplicar de manera práctica los principios fundamentales de la Programación Orientada a Objetos. La encapsulación garantizó que el estado interno del sistema solo se modifique a través de métodos validados, evitando inconsistencias como dos vehículos en el mismo spot.
 
 Conectar el modelo con Flask me mostró que un buen diseño de clases es independiente de la interfaz, el mismo código funcionó tanto en consola como en web sin modificarlo.
@@ -853,5 +872,5 @@ async function submitExit() {
 Link a repositorio:https://github.com/Jose-Pablo-programacion/Portafolio_PP.git
 
 
-Link a hugo:
+Link a hugo:https://jose-pablo-programacion.github.io/Portafolio_PP/practica2/
 
