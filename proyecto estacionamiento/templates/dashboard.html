@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Dashboard</h2>
+
+<h3>Ocupación</h3>
+<p>
+    <strong>Libres:</strong> {{ free }} &nbsp;|&nbsp;
+    <strong>Ocupados:</strong> {{ occupied }}
+</p>
+
+<h3>Spots</h3>
+<table>
+    <tr><th>Spot</th><th>Tipo permitido</th><th>Estado</th></tr>
+    {% for spot in spots %}
+    <tr>
+        <td>{{ spot.spot_id }}</td>
+        <td>{{ spot.allowed.value }}</td>
+        <td class="{{ 'badge-occupied' if spot.occupied else 'badge-free' }}">
+            {{ 'OCUPADO' if spot.occupied else 'libre' }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Tickets Activos ({{ active_tickets|length }})</h3>
+{% if active_tickets %}
+<table>
+    <tr><th>#</th><th>Placa</th><th>Tipo</th><th>Spot</th><th>Entrada</th></tr>
+    {% for t in active_tickets %}
+    <tr>
+        <td>{{ t.ticket_id }}</td>
+        <td>{{ t.vehicle.get_plate() }}</td>
+        <td>{{ t.vehicle.get_type().value }}</td>
+        <td>{{ t.spot.spot_id }}</td>
+        <td>{{ t.entry_time.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No hay tickets activos.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Registrar Salida</h2>
+<div>
+  <label>Número de Ticket:</label>
+  <input type="number" name="ticket_id" id="ticket_id" placeholder="Ej: 1" min="1" required>
+
+  <label>Horas estacionado (simulado, opcional):</label>
+  <input type="number" name="hours" id="hours" placeholder="Dejar vacío = tiempo real" min="0" step="0.5">
+
+  <button onclick="submitExit()">Registrar Salida</button>
+</div>
+
+<script>
+async function submitExit() {
+  const ticket_id = document.getElementById('ticket_id').value.trim();
+  const hours = document.getElementById('hours').value.trim();
+  if (!ticket_id) { alert('El número de ticket es requerido.'); return; }
+  let body = `ticket_id=${encodeURIComponent(ticket_id)}`;
+  if (hours) body += `&hours=${encodeURIComponent(hours)}`;
+  const resp = await fetch('/exit', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: body
+  });
+  if (resp.redirected) { window.location.href = resp.url; }
+  else { window.location.href = '/'; }
+}
+</script>
+{% endblock %}

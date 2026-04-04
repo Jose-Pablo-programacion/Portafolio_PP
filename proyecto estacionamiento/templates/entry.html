@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Registrar Entrada</h2>
+<div>
+  <label>Placa:</label>
+  <input type="text" name="plate" id="plate" placeholder="Ej: ABC-123" required>
+
+  <label>Tipo de vehículo:</label>
+  <select name="type" id="type">
+    <option value="Car">Car</option>
+    <option value="Motorcycle">Motorcycle</option>
+  </select>
+
+  <button onclick="submitEntry()">Registrar</button>
+</div>
+
+<script>
+async function submitEntry() {
+  const plate = document.getElementById('plate').value.trim();
+  const type = document.getElementById('type').value;
+  if (!plate) { alert('La placa es requerida.'); return; }
+  const resp = await fetch('/entry', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: `plate=${encodeURIComponent(plate)}&type=${encodeURIComponent(type)}`
+  });
+  if (resp.redirected) { window.location.href = resp.url; }
+  else { window.location.href = '/'; }
+}
+</script>
+{% endblock %}
