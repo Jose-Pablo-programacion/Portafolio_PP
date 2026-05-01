@@ -256,4 +256,9 @@ y luego escribir nuevamente l
 Conclusión= En esta práctica se instaló se configuró el entorno de Haskell usando GHcup, se usó stack y la herramienta de empaquetado Cabal.Se ejecuto un codigo básico en Haskell y finalmente se ejecuto la aplicacion TODO escrita en Haskell donde se nos permite gestionar tareas desde la terminal de comandos mediante comandos. 
 
 Link a repositorio = https://github.com/Jose-Pablo-programacion/Portafolio_PP 
+
+
+
+
+
 Link a HUGO = https://jose-pablo-programacion.github.io/Portafolio_PP/practica3/ 
